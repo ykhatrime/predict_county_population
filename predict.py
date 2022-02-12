@@ -20,7 +20,6 @@ def selecting_region(df,region):
     this function will 
     """
     df = df.loc[df['regions']==region]
-    df.drop(['regions','indicators','Nationality','sex','age-groups','unit'],axis=1,inplace=True)
     df = df.T
     df.dropna(inplace=True)
     df = df.reset_index()
