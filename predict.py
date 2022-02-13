@@ -1,7 +1,6 @@
 import pandas as pd
 import numpy as np
 from sklearn.linear_model import LinearRegression
-from sklearn.metrics import accuracy_score
 import re
 import json
 import warnings
@@ -20,6 +19,7 @@ def selecting_region(df,region):
     this function will 
     """
     df = df.loc[df['regions']==region]
+    df.drop(['regions'],axis=1,inplace=True)
     df = df.T
     df.dropna(inplace=True)
     df = df.reset_index()
@@ -29,7 +29,6 @@ def prediction_model(df):
     x = df.iloc[:, 0].values.reshape(-1,1)
     y = df.iloc[:, 1].values.reshape(-1,1)
     model = LinearRegression().fit(x,y)
-    print(accuracy_score(x, y, normalize=False))
     return model
 
 def prediction(model, year):
